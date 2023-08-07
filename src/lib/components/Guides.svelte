@@ -7,12 +7,10 @@
 	let game: string;
 	let category: string;
 
-	export { game, category };
-
+	export { game, category};
 
 </script>
-
-<Accordion autocollapse>
+<Accordion>
 	{#each guides[category][game] as {pathname,icon,title,content} }
 		<Guide {pathname} {icon} {title} {content} />
 	{/each}

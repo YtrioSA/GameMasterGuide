@@ -2,6 +2,7 @@
 	import Icon from '@iconify/svelte';
 	import { AccordionItem } from '@skeletonlabs/skeleton';
 	let icon: string, title: string, content: string, pathname: string;
+
 	export { icon, title, content, pathname };
 </script>
 

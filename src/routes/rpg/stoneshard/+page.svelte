@@ -3,13 +3,20 @@
 	import { TabGroup, Tab } from '@skeletonlabs/skeleton';
 	import { page } from '$app/stores';
 	import { dataSource } from '$lib/ts/dataSource';
+	import { platform } from '@floating-ui/dom';
 	let tabSet: number = 0;
 </script>
 
 <div class="ml-5 mr-5">
 	<h1 class="h1 pb-5 text-center mt-5">
-		<img class="inline-block object-cover rounded-full h-[50px] w-[50px]" src={dataSource[$page.url.pathname.split('/')[1]].filter((game) => $page.url.pathname.startsWith(game.route))[0]["icon"]} alt="">
-		Within the Blade
+		<img
+			class="inline-block object-cover rounded-full h-[50px] w-[50px]"
+			src={dataSource[$page.url.pathname.split('/')[1]].filter((game) =>
+				$page.url.pathname.startsWith(game.route)
+			)[0]['icon']}
+			alt=""
+		/>
+		Stoneshard
 	</h1>
 	<hr />
 	<div class="grid grid-cols-2">
@@ -17,18 +24,20 @@
 			<div class="h-full flex justify-center items-center">
 				<p>
 					<Icon icon="fluent:info-12-filled" color="blue" class="inline w-8 h-8" />
-					<b>Within the Blade</b> foi desenvolvido pela
-					<a target="_blank" href="https://store.steampowered.com/developer/rmm"><u>Red Mount Media</u></a>
-					e publicado pela a
-					<a target="_blank" href="https://store.steampowered.com/curator/33027501-Ratalaika-Games/"
-						><u>Ratalaika Games</u></a
-					>
+					<b>Stoneshard</b> foi desenvolvido pela
+					<a target="_blank" href="https://store.steampowered.com/developer/InkStainsGames">
+						<u>Ink Stains Games</u>
+					</a>
+					e publicado pela
+					<a target="_blank" href="https://store.steampowered.com/publisher/HypeTrainDigital">
+						<u>HypeTrain Digital</u>
+					</a>
 				</p>
 			</div>
 		</div>
 		<div class="h-full">
 			<h1 class="h1 text-center p-4">
-				<Icon icon="fluent:document-bullet-list-20-filled" class="inline w-8 h-8"/>
+				<Icon icon="fluent:document-bullet-list-20-filled" class="inline w-8 h-8" />
 				<span>Info</span>
 			</h1>
 			<hr class="ml-3 mr-3" />
@@ -36,11 +45,12 @@
 		<div>
 			<img
 				class="cursor-pointer h-[350px] w-full border-2"
-				src="https://cdn.cloudflare.steamstatic.com/steam/apps/622870/header.jpg"
+				src="https://cdn.cloudflare.steamstatic.com/steam/apps/625960/header.jpg"
 				alt=""
 			/>
-			<span class="font-mono pt-2 pb-2 inline-block"> 
-				Desvendando os mistérios do passado e dominando as Artes Mortais. 
+			<span class="font-mono pt-2 pb-2 inline-block">
+				Explore um mundo de aventuras épicas e desafios inigualáveis em stoneshard, onde seu destino
+				está em suas mãos.
 			</span>
 		</div>
 		<div class="flex justify-center">
@@ -93,19 +103,25 @@
 					<svelte:fragment slot="panel">
 						{#if tabSet === 0}
 							<p class="mt-[25px]">
-								Within the Blade é um jogo de plataforma e ação que se passa no Japão feudal, onde
-								você assume o papel de um ninja em uma jornada para proteger seu clã e enfrentar
-								inimigos perigosos.
+								Stoneshard <b>é um complexo RPG em turnos em mundo aberto</b>. Experimente a vida
+								implacável de um mercenário medieval: viaje por reinos divididos pela guerra, assine
+								contratos, lute, cuide de seus ferimentos e desenvolva sem restrições seu
+								personagem.
 							</p>
 						{:else if tabSet === 1}
-							<p class="mt-[25px]">Jogo eletrônico de plataforma</p>
+							<p class="mt-[25px]">
+								Roguelike, Jogo eletrônico de aventura, 
+                                Early Access, Adventure, Strategy
+							</p>
 						{:else if tabSet === 2}
 							<p class="mt-[25px]">
-								Nintendo Switch, PlayStation 5, PlayStation 4, Microsoft Windows, Xbox Series X e
-								Series S, Xbox One
+								Nintendo Switch, PlayStation 4, 
+                                Linux, Microsoft Windows, Mac OS, Xbox One
 							</p>
 						{:else if tabSet === 3}
-							<p class="mt-[25px]">Ametist Studio, Ratalaika Games, East Asiasoft Limited</p>
+							<p class="mt-[25px]">
+								HypeTrain Digital
+							</p>
 						{/if}
 					</svelte:fragment>
 				</TabGroup>

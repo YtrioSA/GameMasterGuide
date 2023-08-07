@@ -1,11 +1,13 @@
 <script lang="ts">
-	
 	let category: string,
 		game: string,
 		oldpathname: string,
 		currentTile: number = 1,
 		isGuides: boolean = false,
-		pathnames: string[] = [];
+		pathnames: string[] = [],
+		icon: string,
+		name: string,
+		route: string;
 
 	import { computePosition, autoUpdate, offset, shift, flip, arrow } from '@floating-ui/dom';
 	import { page } from '$app/stores';
@@ -25,39 +27,35 @@
 	import '../app.postcss';
 
 	storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow });
-	const gamesFeatured: PopupSettings = {
-		event: 'click',
-		target: 'GamesFeatured',
-		placement: 'bottom'
-	};
+	const gamesFeatured: PopupSettings = { event: 'click', target: 'GamesFeatured',placement: 'bottom'};
 
 	onMount(() => (oldpathname = $page.url.pathname));
 
-	$: {
-		category = $page.url.pathname.split('/')[1];
-		game     = $page.url.pathname.split('/')[2];
+	$: { 
+
+		[category, game] = [$page.url.pathname.split('/')[1], $page.url.pathname.split('/')[2]];
 
 		isGuides = guides?.[category]?.[game] && guides?.[category]?.[game].length != 0 ? true : false;
 
 		if (isGuides) {
 			pathnames = guides?.[category]?.[game].map((guide) => guide.pathname);
 			isGuides =
-				!pathnames.includes($page.url.pathname) && !paths.includes($page.url.pathname)
-					? false
-					: true;
+				!pathnames.includes($page.url.pathname) && 
+				!paths.includes($page.url.pathname) ? false:true;
+
+			[ { icon, name, route } ] = dataSource[category].filter((game) => 
+			$page.url.pathname.startsWith(game.route));
 		}
 
-		if ($page.url.pathname != oldpathname) {
-			currentTile = 1;
-			oldpathname = $page.url.pathname;
-		}
+		currentTile   = $page.url.pathname !== oldpathname ? 
+		((oldpathname = $page.url.pathname), 1) : currentTile;
+
 	}
 </script>
 
 <AppShell
 	slotSidebarLeft={isGuides ? 'block' : 'hidden'}
 	slotSidebarRight="w-[300px] mr-2 {isGuides && currentTile ? 'block' : 'hidden'}">
-
 	<svelte:fragment slot="header">
 		<AppBar slotDefault="flex justify-center">
 			<svelte:fragment slot="lead">
@@ -68,8 +66,11 @@
 			</svelte:fragment>
 			<svelte:fragment slot="default">
 				<div class="relative hidden lg:block">
-					<a href="/" class="btn hover:variant-soft-tertiary {$page.url.pathname === '/'
-							? 'variant-soft-tertiary':''}">
+					<a
+						href="/"
+						class="btn hover:variant-soft-tertiary {$page.url.pathname === '/'
+							? 'variant-soft-tertiary'
+							: ''}">
 
 						<Icon icon="fluent:home-12-filled" class="h-4 w-8" />
 						<span> Home </span>
@@ -98,7 +99,19 @@
 	</svelte:fragment>
 	<svelte:fragment slot="sidebarRight">
 		{#if isGuides}
-			<h1 class="h1 pb-5 mt-5 text-center">Guides</h1>
+			{#if /\/(\d+)$/.test($page.url.pathname)}
+				<div class="flex justify-center items-center h-[80px]">
+					<a href={route} class="h3 p-2 flex gap-x-2">
+						<img src={icon} class="object-cover w-8 h-8 rounded-full" alt="" />
+						{name}
+					</a>
+				</div>
+			{:else}
+				<h1 class="h1 pb-5 mt-5 text-center">
+					<Icon icon="ri:book-fill" class="inline-block w-[50px] h-[50px]"/>
+					Guide(s)
+				</h1>
+			{/if}
 			<hr class="pb-2" />
 			<Guides {category} {game} />
 		{/if}
@@ -109,13 +122,13 @@
 				<svelte:fragment slot="lead">
 					<Icon icon="jam:padlock-f" class="m-auto w-8 h-8" />
 				</svelte:fragment>
-				<h1 class="text-lg">Close</h1>
+				<h1 class="text-sm">Close</h1>
 			</AppRailTile>
 			<AppRailTile bind:group={currentTile} name="tile-2" value={1} title="tile-2">
 				<svelte:fragment slot="lead">
 					<Icon icon="jam:padlock-open-f" class="m-auto w-8 h-8" />
 				</svelte:fragment>
-				<h1 class="text-lg">Open</h1>
+				<h1 class="text-sm">Open</h1>
 			</AppRailTile>
 		</AppRail>
 	</svelte:fragment>

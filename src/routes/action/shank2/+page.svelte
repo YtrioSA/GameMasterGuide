@@ -1,11 +1,17 @@
 <script lang="ts">
 	import Icon from '@iconify/svelte';
 	import { TabGroup, Tab } from '@skeletonlabs/skeleton';
+	import { page } from '$app/stores';
+	import { dataSource } from '$lib/ts/dataSource';
 	let tabSet: number = 0;
 </script>
 
 <div class="ml-5 mr-5">
-	<h1 class="h1 pb-5 text-center mt-5">Shank 2</h1>
+	<h1 class="h1 pb-5 text-center mt-5">
+		<img class="inline-block object-cover rounded-full h-[50px] w-[50px]" src={dataSource[$page.url.pathname.split('/')[1]].filter((game) => $page.url.pathname.startsWith(game.route))[0]["icon"]} alt="">
+		Shank 2
+	</h1>
+	
 	<hr />
 	<div class="grid grid-cols-2">
 		<div>
@@ -13,14 +19,17 @@
 				<p>
 					<Icon icon="fluent:info-12-filled" color="blue" class="inline w-8 h-8" />
 					<b>Shank 2</b> foi desenvolvido pela
-					<a href="https://www.otkgames.com/"><u>Klei Entertainment</u></a>
+					<a target="_blank" href="https://store.steampowered.com/developer/klei"><u>Klei Entertainment</u></a>
 					e publicado pela a
-					<a href="https://store.steampowered.com/publisher/sakuragame"><u>Electronic Arts</u></a>
+					<a target="_blank" href="https://store.steampowered.com/publisher/EA/"><u>Electronic Arts</u></a>
 				</p>
 			</div>
 		</div>
 		<div class="h-full">
-			<h1 class="h1 text-center p-4">Info</h1>
+			<h1 class="h1 text-center p-4">
+				<Icon icon="fluent:document-bullet-list-20-filled" class="inline w-8 h-8"/>
+				<span>Info</span>
+			</h1>
 			<hr class="ml-3 mr-3" />
 		</div>
 		<div>
