@@ -8,7 +8,7 @@
 		icon: string,
 		name: string,
 		route: string;
-
+	
 	import { computePosition, autoUpdate, offset, shift, flip, arrow } from '@floating-ui/dom';
 	import { page } from '$app/stores';
 	import { categorySource } from '$lib/ts/categorySource';
@@ -17,6 +17,9 @@
 	import { onMount } from 'svelte';
 	import { AppShell, AppBar, storePopup, popup, type PopupSettings } from '@skeletonlabs/skeleton';
 	import { AppRail, AppRailTile } from '@skeletonlabs/skeleton';
+	import { Drawer, drawerStore } from '@skeletonlabs/skeleton';
+
+	import Navigation from '$lib/components/Navigation.svelte';
 	import Category from '$lib/components/Category.svelte';
 	import Icon from '@iconify/svelte';
 	import Guides from '$lib/components/Guides.svelte';
@@ -51,11 +54,20 @@
 		((oldpathname = $page.url.pathname), 1) : currentTile;
 
 	}
-</script>
 
+	function drawerOpen(): void {
+		drawerStore.open({});
+	}
+
+</script>
+<Drawer>
+	<h1 class="h2 p-4">Navigation</h1>
+	<hr/>
+	<Navigation />
+</Drawer>
 <AppShell
-	slotSidebarLeft={isGuides ? 'block' : 'hidden'}
-	slotSidebarRight="w-[300px] mr-2 {isGuides && currentTile ? 'block' : 'hidden'}">
+	slotSidebarLeft="{isGuides ? 'hidden lg:block' : 'hidden'}"
+	slotSidebarRight="w-[300px] mr-2 {isGuides && currentTile ? 'hidden lg:block' : 'hidden'}">
 	<svelte:fragment slot="header">
 		<AppBar slotDefault="flex justify-center">
 			<svelte:fragment slot="lead">
@@ -63,6 +75,17 @@
 					<Icon icon="fluent:compass-northwest-20-filled" class="h-8 w-8" />
 					<h1 class="h3 text-[#E86A33]">GameMaster Guide</h1>
 				</a>
+				<div class="flex items-center">
+					<button class="lg:hidden btn btn-sm mr-4" on:click={drawerOpen}>
+						<span>
+							<svg viewBox="0 0 100 80" class="fill-token w-4 h-4">
+								<rect width="100" height="20" />
+								<rect y="30" width="100" height="20" />
+								<rect y="60" width="100" height="20" />
+							</svg>
+						</span>
+					</button>
+				</div>
 			</svelte:fragment>
 			<svelte:fragment slot="default">
 				<div class="relative hidden lg:block">
@@ -122,13 +145,17 @@
 				<svelte:fragment slot="lead">
 					<Icon icon="jam:padlock-f" class="m-auto w-8 h-8" />
 				</svelte:fragment>
-				<h1 class="text-sm">Close</h1>
+				<h1 class="text-sm">
+					Close
+				</h1>
 			</AppRailTile>
 			<AppRailTile bind:group={currentTile} name="tile-2" value={1} title="tile-2">
 				<svelte:fragment slot="lead">
 					<Icon icon="jam:padlock-open-f" class="m-auto w-8 h-8" />
 				</svelte:fragment>
-				<h1 class="text-sm">Open</h1>
+				<h1 class="text-sm">
+					Open
+				</h1>
 			</AppRailTile>
 		</AppRail>
 	</svelte:fragment>

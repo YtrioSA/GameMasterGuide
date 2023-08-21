@@ -12,7 +12,7 @@
         <nav class="list-nav">
             <ul class="list-nav">
                 {#each dataSource[`${genero.toLowerCase()}`] as {name,route,icon}}
-                    <Game {name} {route} {icon} />
+                    <Game {name} {route} {icon} drawerClose={""}/>
                 {/each}
             </ul> 
         </nav>

@@ -38,15 +38,15 @@ export const dataSource: Record<string, Record<string, string>[]> = {
                 icon: "https://pbs.twimg.com/profile_images/1648730826396270609/hBhzTNOg_400x400.png",
             }
         ],
-    
-    rpg: 
-    [
-        {
-            name:"Stoneshard",
-            route:"/rpg/stoneshard",
-            icon:"https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/625960/552aefd08671b2d55291d70f1ad91e63834456fb.jpg"
-        }
-    ]
+
+    rpg:
+        [
+            {
+                name: "Stoneshard",
+                route: "/rpg/stoneshard",
+                icon: "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/625960/552aefd08671b2d55291d70f1ad91e63834456fb.jpg"
+            }
+        ]
 
 };
 
@@ -60,9 +60,8 @@ export const guides: Record<string, Record<string, Record<string, any>[]>> =
                 {
                     icon: "ph:sword-bold",
                     title: "Guia Inicial: The Vagrant",
-                    content: `Um guia essencial repleto de dicas e truques para novos 
-                    aventureiros que estão começando sua jornada no mundo 
-                    misterioso e desafiador de The Vagrant.`,
+                    content: `o Guia de Controles e Mecânicas do Jogo oferece aos jogadores 
+                              informações claras e concisas sobre como interagir com o mundo do jogo.`,
                     pathname: "/action/thevagrant/guide/1",
                 }
             ],
@@ -118,19 +117,19 @@ export const guides: Record<string, Record<string, Record<string, any>[]>> =
                 }
             ]
     },
-    
+
     "rpg":
     {
         "stoneshard":
-        [
-            {
-                icon:"ph:scroll-bold",
-                title:"Guia Inicial: Stoneshard",
-                content:`Explore o mundo de stoneshard,
+            [
+                {
+                    icon: "ph:scroll-bold",
+                    title: "Guia Inicial: Stoneshard",
+                    content: `Explore o mundo de stoneshard,
                 enfrentando desafios épicos com espada e magia.`,
-                pathname:"/rpg/stoneshard/guide/1"
-            }
-        ]
+                    pathname: "/rpg/stoneshard/guide/1"
+                }
+            ]
     }
 
 }

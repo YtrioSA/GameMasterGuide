@@ -8,7 +8,6 @@ const metroidvaniaFeatured: PopupSettings = { event: "focus-click", target: "met
 const roguelikeFeatured:    PopupSettings = { event: "focus-click", target: "roguelikeFeatured",   placement: "right" };
 const rpgFeatured:          PopupSettings = { event: "focus-click", target: "rpgFeatured",         placement: "right" };
 
-
 export const categorySource:Record<string,any>[] = 
 [
     { 

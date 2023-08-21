@@ -3,6 +3,7 @@
 	import { TabGroup, Tab } from '@skeletonlabs/skeleton';
 	import { page } from '$app/stores';
 	import { dataSource } from '$lib/ts/dataSource';
+	import Guides from '$lib/components/Guides.svelte';
 	let tabSet: number = 0;
 </script>
 
@@ -12,15 +13,14 @@
 		Dead Cells
 	</h1>
 	<hr />
-	<div class="grid grid-cols-2">
+	<div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
 		<div>
 			<div class="h-full flex justify-center items-center">
 				<p>
 					<Icon icon="fluent:info-12-filled" color="blue" class="inline w-8 h-8" />
 					<b>Dead Cells</b> foi desenvolvido pela
 					<a target="_blank" href="https://store.steampowered.com/developer/MotionTwin"
-						><u>Motion Twin</u></a
-					>
+						><u>Motion Twin</u></a>
 					e publicado pela
 					<a target="_blank" href="https://store.steampowered.com/publisher/playdigous"><u>Playdigious</u></a>
 				</p>
@@ -46,51 +46,58 @@
 		</div>
 		<div class="flex justify-center">
 			<div class="w-auto mt-5 text-base tracking-wide leading-8">
-				<TabGroup class="w-[470px]" justify="justify-center">
+				<TabGroup class="w-[300px] lg:w-[470px]" justify="justify-evenly lg:justify-between">
 					<Tab
-						bind:group={tabSet}
-						name="tab1"
-						value={0}
-						class="mx-1 border-2 hover:variant-filled-primary"
-					>
-						<span class="text-sm">
-							<Icon icon="fluent:book-20-filled" class="inline w-4 h-4" />
-							Story
-						</span>
-					</Tab>
-					<Tab
-						bind:group={tabSet}
-						name="tab2"
-						value={1}
-						class="mx-1 border-2 hover:variant-filled-primary"
-					>
-						<span class="text-sm">
-							<Icon icon="tabler:gender-epicene" class="inline w-4 h-4" />
-							Gender
-						</span>
-					</Tab>
-					<Tab
-						bind:group={tabSet}
-						name="tab3"
-						value={2}
-						class="mx-1 border-2 hover:variant-filled-primary"
-					>
-						<span class="text-sm">
-							<Icon icon="material-symbols:device-reset" class="inline w-4 h-4" />
-							Platform
-						</span>
-					</Tab>
-					<Tab
-						bind:group={tabSet}
-						name="tab4"
-						value={3}
-						class="mx-1 border-2 hover:variant-filled-primary"
-					>
-						<span class="text-sm">
-							<Icon icon="tabler:brush" class="inline w-4 h-4" />
-							Studio
-						</span>
-					</Tab>
+							bind:group={tabSet}
+							name="tab1"
+							value={0}
+							class="mx-1 border-2 hover:variant-filled-primary"
+						>
+							<span class="text-sm">
+								<Icon icon="fluent:book-20-filled" class="inline w-4 h-4" />
+								<span class="hidden lg:block">
+									Story
+								</span>
+							</span>
+						</Tab>
+						<Tab
+							bind:group={tabSet}
+							name="tab2"
+							value={1}
+							class="mx-1 border-2 hover:variant-filled-primary"
+						>
+							<span class="text-sm">
+								<Icon icon="tabler:gender-epicene" class="inline w-4 h-4" />
+								<span class="hidden lg:block">
+									Gender
+								</span>
+							</span>
+						</Tab>
+						<Tab
+							bind:group={tabSet}
+							name="tab3"
+							value={2}
+							class="mx-1 border-2 hover:variant-filled-primary"
+						>
+							<span class="text-sm">
+								<Icon icon="material-symbols:device-reset" class="inline w-4 h-4" />
+								<span class="hidden lg:block">
+									Platform
+								</span>
+							</span>
+						</Tab>
+						<Tab
+							bind:group={tabSet}
+							name="tab4"
+							value={3}
+							class="mx-1 border-2 hover:variant-filled-primary">
+							<span class="text-sm">
+								<Icon icon="tabler:brush" class="inline w-4 h-4" />
+								<span class="hidden lg:block">
+									Studio
+								</span>
+							</span>
+						</Tab>
 					<svelte:fragment slot="panel">
 						{#if tabSet === 0}
 							<p class="mt-[25px]">
@@ -113,6 +120,10 @@
 						{/if}
 					</svelte:fragment>
 				</TabGroup>
+				<div class="mt-5 w-[300px] block lg:hidden pb-5">
+					<Guides category = {$page.url.pathname.split('/')[1]} 
+							game     = {$page.url.pathname.split('/')[2]} />
+				</div>
 			</div>
 		</div>
 	</div>

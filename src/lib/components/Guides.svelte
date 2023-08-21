@@ -7,7 +7,7 @@
 	let game: string;
 	let category: string;
 
-	export { game, category};
+	export {game, category};
 
 </script>
 <Accordion>
